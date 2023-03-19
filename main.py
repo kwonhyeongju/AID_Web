@@ -1,6 +1,11 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
+from starlette.templating import Jinja2Templates
+
+templates = Jinja2Templates(directory="templates")
+
 app = FastAPI()
 
 @app.get("/")
-def 함수이름():
-  return '보낼 값'
+def home(request: Request) :
+    return templates.TemplateResponse("index.html",
+                                      {"request": request})
